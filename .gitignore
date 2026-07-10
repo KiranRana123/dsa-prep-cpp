@@ -1,0 +1,9 @@
+# macOS debug files
+*.dSYM/
+
+# VS Code settings
+.vscode/
+
+# Compiled files
+*.out
+*.o
