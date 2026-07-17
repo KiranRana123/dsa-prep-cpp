@@ -75,3 +75,43 @@ class Solution{
         return ans;
     }
 };
+
+
+//first solution
+class Solution{
+    private: 
+    void pathfinder(int r, int c, string temp, vector<string>& ans, vector<vector<int>>& vis, vector<vector<int> > &grid){
+        if(r<0 || c < 0 || r > grid.size()-1  || c > grid.size()-1 )
+            return;
+        if(vis[r][c] || grid[r][c] == 0)
+            return;
+        if(r == grid.size()-1 && c == grid.size()-1)
+        {
+            ans.push_back(temp);
+            return;
+        }
+        
+        
+        vector<vector<int>> dir = {{1,0}, {0,-1}, {0,1}, {-1,0}};
+        vector<string> move = {"D", "L", "R", "U"};
+      
+        if(!vis[r][c] && grid[r][c] == 1)
+        {
+            vis[r][c] = 1;
+            for(int i=0; i<4; i++)
+            {
+                pathfinder(r+dir[i][0], c+dir[i][1], temp+move[i], ans, vis, grid);
+            }
+            vis[r][c] = 0;
+        }
+    }
+    public:
+    vector<string> findPath(vector<vector<int> > &grid) {
+        string temp = "";
+        vector<vector<int>> vis (grid.size(),vector<int> (grid.size(),0));
+        vector<string> ans;
+        if(grid[0][0] == 1)
+            pathfinder(0,0, temp, ans,vis, grid);
+        return ans;
+    }
+};
